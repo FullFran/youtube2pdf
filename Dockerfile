@@ -1,7 +1,7 @@
-# Usa una imagen ligera de Python
+# Usa una imagen base ligera con Python
 FROM python:3.11-slim
 
-# Instala dependencias del sistema necesarias para WeasyPrint y Google Generative AI
+# Instala dependencias del sistema necesarias para WeasyPrint
 RUN apt-get update && apt-get install -y \
     libpango-1.0-0 \
     libpangocairo-1.0-0 \
@@ -25,8 +25,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Expone el puerto 8000 para FastAPI
 EXPOSE 8000
 
-# Configura la variable de entorno para la API Key de Gemini (se pasará en runtime)
+# Configura la variable de entorno para la API Key de Gemini
 ENV GEMINI_API_KEY=""
 
-# Comando para ejecutar la aplicación con Uvicorn
+# Comando para ejecutar la aplicación
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
