@@ -32,9 +32,11 @@ async function getSubtitles() {
 }
 
 async function getMarkdown() {
-    const videoId = document.getElementById("videoId").value;
+    let videoUrl = document.getElementById("videoId").value;
+    let videoId = extractVideoId(videoUrl);
+
     if (!videoId) {
-        alert("Por favor, introduce un ID de video.");
+        alert("Por favor, introduce una URL válida de youtube.");
         return;
     }
 
@@ -54,9 +56,11 @@ async function getMarkdown() {
 }
 
 function getPDF() {
-    const videoId = document.getElementById("videoId").value;
+    let videoUrl = document.getElementById("videoId").value;
+    let videoId = extractVideoId(videoUrl);
+
     if (!videoId) {
-        alert("Por favor, introduce un ID de video.");
+        alert("Por favor, introduce una URL válida de youtube.");
         return;
     }
 
