@@ -8,7 +8,7 @@ async function getSubtitles() {
     }
 
     try {
-        const response = await fetch(`${API_BASE_URL}/subtitles/${videoId}`);
+        const response = await fetch(`${API_BASE_URL}subtitles/${videoId}`);
         const data = await response.json();
 
         if (response.ok) {
@@ -30,7 +30,7 @@ async function getMarkdown() {
     }
 
     try {
-        const response = await fetch(`${API_BASE_URL}/subtitles/${videoId}/markdown`);
+        const response = await fetch(`${API_BASE_URL}subtitles/${videoId}/markdown`);
         const data = await response.json();
 
         if (response.ok) {
@@ -52,5 +52,5 @@ function getPDF() {
     }
 
     // Abrir el PDF en una nueva pestaña
-    window.open(`${API_BASE_URL}/subtitles/${videoId}/pdf`, "_blank");
+    window.open(`${API_BASE_URL}subtitles/${videoId}/pdf`, "_blank");
 }
