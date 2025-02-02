@@ -1,23 +1,22 @@
-const API_BASE_URL = "https://youtube2pdf-production.up.railway.app/"; 
+const API_BASE_URL = "https://youtube2pdf-production.up.railway.app"; // ✅ Eliminada barra extra
 
 function extractVideoId(url) {
-    const regex = /(?:youtu\.be\/|youtube\.com\/(?:.*v=|embed\/|v\/|shorts\/))([a-zA-Z0-9_-]{11})/;
+    const regex = /(?:youtu\.be\/|youtube\.com\/(?:.*[?&]v=|embed\/|v\/|shorts\/))([a-zA-Z0-9_-]{11})/;
     const match = url.match(regex);
     return match ? match[1] : null;
 }
-
 
 async function getSubtitles() {
     let videoUrl = document.getElementById("videoId").value;
     let videoId = extractVideoId(videoUrl);
 
     if (!videoId) {
-        alert("Por favor, introduce una URL válida de youtube.");
+        alert("Por favor, introduce una URL válida de YouTube.");
         return;
     }
 
     try {
-        const response = await fetch(`${API_BASE_URL}subtitles/${videoId}`);
+        const response = await fetch(`${API_BASE_URL}/subtitles/${videoId}`); // ✅ Corregida la URL
         const data = await response.json();
 
         if (response.ok) {
@@ -36,12 +35,12 @@ async function getMarkdown() {
     let videoId = extractVideoId(videoUrl);
 
     if (!videoId) {
-        alert("Por favor, introduce una URL válida de youtube.");
+        alert("Por favor, introduce una URL válida de YouTube.");
         return;
     }
 
     try {
-        const response = await fetch(`${API_BASE_URL}subtitles/${videoId}/markdown`);
+        const response = await fetch(`${API_BASE_URL}/subtitles/${videoId}/markdown`); // ✅ Corregida la URL
         const data = await response.json();
 
         if (response.ok) {
@@ -60,10 +59,11 @@ function getPDF() {
     let videoId = extractVideoId(videoUrl);
 
     if (!videoId) {
-        alert("Por favor, introduce una URL válida de youtube.");
+        alert("Por favor, introduce una URL válida de YouTube.");
         return;
     }
 
-    // Abrir el PDF en una nueva pestaña
-    window.open(`${API_BASE_URL}subtitles/${videoId}/pdf`, "_blank");
+    // ✅ Corregida la URL para abrir el PDF correctamente
+    window.open(`${API_BASE_URL}/subtitles/${videoId}/pdf`, "_blank");
 }
+
