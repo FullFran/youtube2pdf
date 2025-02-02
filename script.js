@@ -1,9 +1,18 @@
 const API_BASE_URL = "https://youtube2pdf-production.up.railway.app/"; 
 
+function extractVideoId(url) {
+    const regex = /(?:youtu\.be\/|youtube\.com\/(?:.*v=|embed\/|v\/|shorts\/))([a-zA-Z0-9_-]{11})/;
+    const match = url.match(regex);
+    return match ? match[1] : null;
+}
+
+
 async function getSubtitles() {
-    const videoId = document.getElementById("videoId").value;
+    let videoUrl = document.getElementById("videoId").value;
+    let videoId = extractVideoId(videoUrl);
+
     if (!videoId) {
-        alert("Por favor, introduce un ID de video.");
+        alert("Por favor, introduce una URL válida de youtube.");
         return;
     }
 
