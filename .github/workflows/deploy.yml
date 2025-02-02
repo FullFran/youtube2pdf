@@ -1,0 +1,24 @@
+name: Deploy Frontend to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@v3
+
+      - name: Publicar la carpeta web/ en la rama gh-pages
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git checkout --orphan gh-pages
+          git rm -rf .
+          mv web/* .
+          git add .
+          git commit -m "Desplegando frontend a GitHub Pages"
+          git push --force origin gh-pages
