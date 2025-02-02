@@ -1,13 +1,15 @@
-# Usa una imagen base más ligera
+# Usa una imagen base ligera con Python
 FROM python:3.11-slim
 
-# Instala las dependencias del sistema necesarias para WeasyPrint
+# Instala dependencias del sistema necesarias para WeasyPrint
 RUN apt-get update && apt-get install -y \
+    libpango-1.0-0 \
     libpangocairo-1.0-0 \
-    libpangoft2-1.0-0 \
-    libgdk-pixbuf2.0-0 \
+    libcairo2 \
+    libjpeg62-turbo \
+    libpng-dev \
     libffi-dev \
-    libgobject-2.0-0 \
+    libgdk-pixbuf-2.0-0 \
     libglib2.0-0 \
     && apt-get clean
 
@@ -23,8 +25,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Expone el puerto 8000 para FastAPI
 EXPOSE 8000
 
-# Configura la variable de entorno para que FastAPI use el host correcto
-ENV HOST=0.0.0.0
+# Configura la variable de entorno para la API Key de Gemini
+ENV GEMINI_API_KEY=""
 
-# Comando para ejecutar la aplicación con Uvicorn
+# Comando para ejecutar la aplicación
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
