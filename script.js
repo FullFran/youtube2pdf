@@ -86,7 +86,7 @@ async function getMarkdown() {
     }
 }
 
-function getPDF() {
+async function getPDF() {
     let videoUrl = document.getElementById("videoId").value;
     let videoId = extractVideoId(videoUrl);
 
@@ -96,7 +96,37 @@ function getPDF() {
     }
 
     let pdfUrl = `${API_BASE_URL}/subtitles/${videoId}/pdf`;
-    console.log(`🔹 Abriendo PDF desde: ${pdfUrl}`);
+    
+     // 🔹 Mostrar mensaje de procesamiento
+    document.getElementById("pdf-status").classList.remove("hidden");
+    document.getElementById("pdf-status").innerText = "📄 Procesando PDF...";
 
-    window.open(pdfUrl, "_blank");
+    console.log(`🔹 Generando PDF desde: ${pdfUrl}`);
+
+    try {
+        // 🔹 Esperar la respuesta de la API
+        let response = await fetch(pdfUrl);
+        
+        if (!response.ok) {
+            throw new Error(`Error ${response.status}: ${response.statusText}`);
+        }
+
+        // 🔹 Convertir respuesta en blob (archivo)
+        let blob = await response.blob();
+
+        // 🔹 Crear un enlace de descarga automático
+        let link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "Informe.pdf";
+
+        // 🔹 Ocultar mensaje y simular que la descarga ha sido generada
+        setTimeout(() => {
+            document.getElementById("pdf-status").innerText = "✅ PDF listo para descargar.";
+            link.click(); // Simula la descarga automática
+        }, 3000);
+        
+    } catch (error) {
+        document.getElementById("pdf-status").innerText = "❌ Error al generar el PDF.";
+        console.error(error);
+    }
 }
