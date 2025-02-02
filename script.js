@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://youtube2pdf-production.up.railway.app"; // ✅ Eliminada barra extra
+const API_BASE_URL = "https://youtube2pdf-production.up.railway.app"; // ✅ Asegurar que no haya doble //
 
 function extractVideoId(url) {
     const regex = /(?:youtu\.be\/|youtube\.com\/(?:.*[?&]v=|embed\/|v\/|shorts\/))([a-zA-Z0-9_-]{11})/;
@@ -16,16 +16,23 @@ async function getSubtitles() {
     }
 
     try {
-        const response = await fetch(`${API_BASE_URL}/subtitles/${videoId}`); // ✅ Corregida la URL
-        const data = await response.json();
+        console.log(`🔹 Solicitando subtítulos desde: ${API_BASE_URL}/subtitles/${videoId}`);
+        const response = await fetch(`${API_BASE_URL}/subtitles/${videoId}`);
 
-        if (response.ok) {
+        if (!response.ok) {
+            throw new Error(`Error ${response.status}: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        console.log("🔹 Respuesta de la API:", data);
+
+        if (data && typeof data === "object") {
             document.getElementById("result").innerText = JSON.stringify(data, null, 2);
         } else {
-            alert(data.detail);
+            throw new Error("Formato de respuesta inesperado.");
         }
     } catch (error) {
-        alert("Error al obtener los subtítulos.");
+        alert(`Error al obtener los subtítulos: ${error.message}`);
         console.error(error);
     }
 }
@@ -40,16 +47,23 @@ async function getMarkdown() {
     }
 
     try {
-        const response = await fetch(`${API_BASE_URL}/subtitles/${videoId}/markdown`); // ✅ Corregida la URL
-        const data = await response.json();
+        console.log(`🔹 Solicitando Markdown desde: ${API_BASE_URL}/subtitles/${videoId}/markdown`);
+        const response = await fetch(`${API_BASE_URL}/subtitles/${videoId}/markdown`);
 
-        if (response.ok) {
+        if (!response.ok) {
+            throw new Error(`Error ${response.status}: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        console.log("🔹 Respuesta de la API:", data);
+
+        if (data && data.markdown) {
             document.getElementById("result").innerText = data.markdown;
         } else {
-            alert(data.detail);
+            throw new Error("Formato de respuesta inesperado.");
         }
     } catch (error) {
-        alert("Error al obtener el Markdown.");
+        alert(`Error al obtener el Markdown: ${error.message}`);
         console.error(error);
     }
 }
@@ -63,7 +77,8 @@ function getPDF() {
         return;
     }
 
-    // ✅ Corregida la URL para abrir el PDF correctamente
-    window.open(`${API_BASE_URL}/subtitles/${videoId}/pdf`, "_blank");
-}
+    let pdfUrl = `${API_BASE_URL}/subtitles/${videoId}/pdf`;
+    console.log(`🔹 Abriendo PDF desde: ${pdfUrl}`);
 
+    window.open(pdfUrl, "_blank");
+}
