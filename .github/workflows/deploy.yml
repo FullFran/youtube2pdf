@@ -20,11 +20,11 @@ jobs:
 
       - name: Publicar la carpeta web/ en la rama gh-pages
         run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
           git checkout --orphan gh-pages
           git rm -rf .
           mv /tmp/web/* ./  # ✅ Recupera la carpeta `web/`
           git add .
           git commit -m "Desplegando frontend a GitHub Pages"
-          git push --force origin gh-pages
+          git push --force https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git gh-pages
