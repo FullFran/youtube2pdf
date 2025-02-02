@@ -5,4 +5,4 @@ requests
 python-dotenv
 markdown
 weasyprint
-google-generativeai
+openai
