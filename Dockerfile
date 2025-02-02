@@ -1,18 +1,6 @@
 # Usa una imagen base ligera con Python
 FROM python:3.11-slim
 
-# Instala dependencias del sistema necesarias para WeasyPrint
-RUN apt-get update && apt-get install -y \
-    libpango-1.0-0 \
-    libpangocairo-1.0-0 \
-    libcairo2 \
-    libjpeg62-turbo \
-    libpng-dev \
-    libffi-dev \
-    libgdk-pixbuf-2.0-0 \
-    libglib2.0-0 \
-    && apt-get clean
-
 # Establece el directorio de trabajo en el contenedor
 WORKDIR /app
 
@@ -28,5 +16,5 @@ EXPOSE 8000
 # Configura la variable de entorno para la API Key de Gemini
 ENV GEMINI_API_KEY=""
 
-# Comando para ejecutar la aplicación
+# Comando para ejecutar la aplicación con Uvicorn
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
