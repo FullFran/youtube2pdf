@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
+from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import logging
 from subtitles import fetch_subtitles  # Importa la función del otro archivo
@@ -11,6 +12,15 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["https://fullfran.github.io"],  
+    allow_credentials=True,
+    allow_methods=["*"],  # 
+    allow_headers=["*"],  # 
+)
+
 
 @app.get("/subtitles/{video_id}")
 async def get_subtitles(video_id: str):
