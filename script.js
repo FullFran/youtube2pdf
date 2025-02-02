@@ -1,9 +1,13 @@
-const API_BASE_URL = "https://youtube2pdf-production.up.railway.app"; // ✅ Asegurar que no haya doble //
+const API_BASE_URL = "https://youtube2pdf-production.up.railway.app"; // ✅ Sin barra al final
 
 function extractVideoId(url) {
     const regex = /(?:youtu\.be\/|youtube\.com\/(?:.*[?&]v=|embed\/|v\/|shorts\/))([a-zA-Z0-9_-]{11})/;
     const match = url.match(regex);
     return match ? match[1] : null;
+}
+
+function showLoader(show) {
+    document.getElementById("loader").style.display = show ? "block" : "none";
 }
 
 async function getSubtitles() {
@@ -15,16 +19,22 @@ async function getSubtitles() {
         return;
     }
 
+    showLoader(true);
     try {
-        console.log(`🔹 Solicitando subtítulos desde: ${API_BASE_URL}/subtitles/${videoId}`);
-        const response = await fetch(`${API_BASE_URL}/subtitles/${videoId}`);
+        let url = `${API_BASE_URL}/subtitles/${videoId}`;
+        console.log(`🔹 Solicitando subtítulos desde: ${url}`);
+
+        const response = await fetch(url);
+        console.log("🔹 Respuesta de la API:", response);
 
         if (!response.ok) {
             throw new Error(`Error ${response.status}: ${response.statusText}`);
         }
 
         const data = await response.json();
-        console.log("🔹 Respuesta de la API:", data);
+        console.log("🔹 Datos recibidos:", data);
+
+        showLoader(false);
 
         if (data && typeof data === "object") {
             document.getElementById("result").innerText = JSON.stringify(data, null, 2);
@@ -32,6 +42,7 @@ async function getSubtitles() {
             throw new Error("Formato de respuesta inesperado.");
         }
     } catch (error) {
+        showLoader(false);
         alert(`Error al obtener los subtítulos: ${error.message}`);
         console.error(error);
     }
@@ -46,16 +57,22 @@ async function getMarkdown() {
         return;
     }
 
+    showLoader(true);
     try {
-        console.log(`🔹 Solicitando Markdown desde: ${API_BASE_URL}/subtitles/${videoId}/markdown`);
-        const response = await fetch(`${API_BASE_URL}/subtitles/${videoId}/markdown`);
+        let url = `${API_BASE_URL}/subtitles/${videoId}/markdown`;
+        console.log(`🔹 Solicitando Markdown desde: ${url}`);
+
+        const response = await fetch(url);
+        console.log("🔹 Respuesta de la API:", response);
 
         if (!response.ok) {
             throw new Error(`Error ${response.status}: ${response.statusText}`);
         }
 
         const data = await response.json();
-        console.log("🔹 Respuesta de la API:", data);
+        console.log("🔹 Datos recibidos:", data);
+
+        showLoader(false);
 
         if (data && data.markdown) {
             document.getElementById("result").innerText = data.markdown;
@@ -63,6 +80,7 @@ async function getMarkdown() {
             throw new Error("Formato de respuesta inesperado.");
         }
     } catch (error) {
+        showLoader(false);
         alert(`Error al obtener el Markdown: ${error.message}`);
         console.error(error);
     }

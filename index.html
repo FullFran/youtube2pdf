@@ -3,24 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subtítulos API</title>
+    <title>Youtube2PDF - Subtítulos</title>
     <script defer src="script.js"></script>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; margin: 40px; }
-        input { padding: 10px; width: 300px; }
-        button { padding: 10px 20px; margin: 10px; }
-        #result { margin-top: 20px; white-space: pre-wrap; text-align: left; }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <h1>Subtítulos API</h1>
-    <input type="text" id="videoId" placeholder="Por favor, introduce una URL válida de youtube.">
-    <button onclick="getSubtitles()">Obtener Subtítulos</button>
-    <button onclick="getMarkdown()">Ver en Markdown</button>
-    <button onclick="getPDF()">Descargar PDF</button>
+    <div class="container">
+        <h1>Youtube2PDF - Subtítulos</h1>
+        <p>Pega la URL de un video de YouTube para extraer los subtítulos en diferentes formatos.</p>
+        
+        <input type="text" id="videoId" placeholder="Introduce la URL del video de YouTube">
+        <div class="buttons">
+            <button onclick="getSubtitles()">Obtener Subtítulos</button>
+            <button onclick="getMarkdown()">Ver en Markdown</button>
+            <button onclick="getPDF()">Descargar PDF</button>
+        </div>
 
-    <div id="result"></div>
+        <div id="loader" class="hidden">⏳ Procesando...</div>
+        <div id="result"></div>
+    </div>
 
 </body>
 </html>
