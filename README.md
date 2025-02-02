@@ -98,7 +98,7 @@ Instead of **rewatching an entire video**, this tool lets you **save and structu
 
 ## 📌 Try It Now  
 
-A live demo is available on [**GitHub Pages**](https://fullfran.github.io/youtube2pdf/) , where you can test the tool by pasting a YouTube URL and selecting the desired format.  
+A live demo is available on fullfran.github.io/youtube2pdf/, where you can test the tool by pasting a YouTube URL and selecting the desired format.  
 
 
 ## 🛠️ Technologies Used
