@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://youtube2pdf-production.up.railway.app";  
+const API_BASE_URL = "https://youtube2pdf-production.up.railway.app/"; 
 
 async function getSubtitles() {
     const videoId = document.getElementById("videoId").value;
