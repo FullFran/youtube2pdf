@@ -26,7 +26,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 8000
 
 # Configura la variable de entorno para la API Key de Gemini
-ENV GEMINI_API_KEY=""
+ENV OPENAI_API_KEY=""
 
 # Comando para ejecutar la aplicación
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

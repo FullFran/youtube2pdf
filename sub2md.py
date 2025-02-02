@@ -52,3 +52,6 @@ def subtitles_to_markdown(subtitle_data):
         # Extraer el texto generado
         markdown_report = response.choices[0].message.content
         return markdown_report
+    except openai.APIError as e:
+        print(f"❌ Error al generar el informe con OpenAI: {e}")
+        return None
