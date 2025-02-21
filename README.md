@@ -44,7 +44,6 @@ Instead of **rewatching an entire video**, this tool lets you **save and structu
 
 A live demo is available on fullfran.github.io/youtube2pdf/, where you can test the tool by pasting a YouTube URL and selecting the desired format.  
 
-
 ## 🛠️ Technologies Used
 - FastAPI (Python) – High-performance API for subtitle extraction
 - Large Language Models (LLMs) – AI-powered text formatting
@@ -59,3 +58,60 @@ This stack ensures:
 - 🤖 AI-enhanced text processing for subtitle formatting
 - ☁️ Cloud-hosted backend for instant availability
 - 📦 Scalable & portable deployment with Docker
+
+Aquí tienes el apartado sobre cómo desplegar el proyecto en local, con Docker y en Railway:  
+
+---
+
+## 🚀 Deployment Guide  
+
+### 🔧 Running Locally  
+1. **Clone the repository**  
+   ```bash
+   git clone https://github.com/fullfran/youtube2pdf.git
+   cd youtube2pdf
+   ```
+
+2. **Create a virtual environment and install dependencies**  
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # En Windows usa: venv\Scripts\activate
+   pip install -r requirements.txt
+   ```
+
+3. **Run the FastAPI server**  
+   ```bash
+   uvicorn app.main:app --reload
+   ```
+
+4. Open `http://127.0.0.1:8000/docs` to access the API.  
+
+---
+
+### 🐳 Running with Docker  
+1. **Build the Docker image**  
+   ```bash
+   docker build -t youtube2pdf .
+   ```
+
+2. **Run the container**  
+   ```bash
+   docker run -p 8000:8000 youtube2pdf
+   ```
+
+3. Open `http://127.0.0.1:8000/docs` to access the API.  
+
+
+---
+
+### 🚄 Deploying on Railway  
+1. **Fork the repository** on GitHub.  
+2. **Go to Railway** and create a new project.  
+3. **Connect it to your forked repository**.  
+4. **Add the required environment variables**.  
+5. **Deploy with one click** and get a live URL ready to use.  
+
+
+
+
+
