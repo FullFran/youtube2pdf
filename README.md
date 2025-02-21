@@ -59,7 +59,6 @@ This stack ensures:
 - ☁️ Cloud-hosted backend for instant availability
 - 📦 Scalable & portable deployment with Docker
 
-Aquí tienes el apartado sobre cómo desplegar el proyecto en local, con Docker y en Railway:  
 
 ---
 
