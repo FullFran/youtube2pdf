@@ -6,6 +6,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# Configurar logging para depuración
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
 try:
     PROXY_USERNAME = os.getenv("WEBSHARE_PROXY_USERNAME")
     PROXY_PASSWORD = os.getenv("WEBSHARE_PROXY_PASSWORD")
@@ -27,9 +31,7 @@ except Exception as e:
     logger.info("🚫 Proxy deshabilitado, usando conexión directa.")
 
 
-# Configurar logging para depuración
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+
 
 def fetch_subtitles(video_id: str):
     """
