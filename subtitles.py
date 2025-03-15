@@ -1,9 +1,37 @@
 from youtube_transcript_api import YouTubeTranscriptApi, TranscriptsDisabled, NoTranscriptFound
+from youtube_transcript_api.proxies import WebshareProxyConfig
 import logging
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Configurar logging para depuración
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+try:
+    PROXY_USERNAME = os.getenv("WEBSHARE_PROXY_USERNAME")
+    PROXY_PASSWORD = os.getenv("WEBSHARE_PROXY_PASSWORD")
+
+    if not PROXY_USERNAME or not PROXY_PASSWORD:
+        raise ValueError("Faltan credenciales de Webshare Proxy en las variables de entorno.")
+
+    ytt_api = YouTubeTranscriptApi(
+        proxy_config=WebshareProxyConfig(
+            proxy_username=PROXY_USERNAME,
+            proxy_password=PROXY_PASSWORD,
+        )
+    )
+    logger.info("✅ Proxy configurado correctamente con Webshare.")
+
+except Exception as e:
+    logger.error(f"⚠️ Error al configurar el proxy: {e}")
+    ytt_api = YouTubeTranscriptApi()
+    logger.info("🚫 Proxy deshabilitado, usando conexión directa.")
+
+
+
 
 def fetch_subtitles(video_id: str):
     """
@@ -17,7 +45,7 @@ def fetch_subtitles(video_id: str):
 
         # Obtener lista de subtítulos disponibles
         try:
-            transcript_list = YouTubeTranscriptApi.list_transcripts(video_id)
+            transcript_list = ytt_api.list_transcripts(video_id)
         except TranscriptsDisabled:
             return {"error": "Los subtítulos están deshabilitados para este video."}
         except NoTranscriptFound:
