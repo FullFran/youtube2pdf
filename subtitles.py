@@ -4,14 +4,8 @@ import logging
 import os
 from dotenv import load_dotenv
 
-# Cargar variables de entorno desde .env
 load_dotenv()
 
-# Configurar logging para depuración (esto se debe hacer antes de usar logger)
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-
-# Configurar la API de YouTube Transcript con Webshare Proxy
 try:
     PROXY_USERNAME = os.getenv("WEBSHARE_PROXY_USERNAME")
     PROXY_PASSWORD = os.getenv("WEBSHARE_PROXY_PASSWORD")
@@ -32,6 +26,10 @@ except Exception as e:
     ytt_api = YouTubeTranscriptApi()
     logger.info("🚫 Proxy deshabilitado, usando conexión directa.")
 
+
+# Configurar logging para depuración
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 def fetch_subtitles(video_id: str):
     """
