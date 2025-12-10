@@ -1,128 +1,121 @@
-# ⚡ ShipFree
+# 🎥 YouTube2PDF
 
-Hi there! 👋
+Turn YouTube videos into actionable PDF summaries and study guides using AI.
 
-ShipFree is a free alternative to ShipFast, designed to simplify and optimize your shipping process. It’s built using modern web technologies like Next.js, Supabase, Stripe, LemonSqueezy, Drizzle ORM and Mailgun.
+YouTube2PDF is a powerful tool that extracts transcripts from YouTube videos, processes them with OpenAI's advanced language models, and generates clean, professional PDF reports. Perfect for students, researchers, and professionals who need to digest video content quickly.
 
-## Features
+![YouTube2PDF Banner](https://placehold.co/1200x400/2563eb/ffffff?text=YouTube2PDF)
 
-- SEO Optimisation
-- User authentication with Supabase
-- Stripe and LemonSqueezy integration
-- Email notifications via Mailgun
-- Modern UI built with Next.js and TailwindCSS
+## ✨ Features
 
-## Docker Setup
+-   **📽️ Video Transcription**: Automatically fetch and parse transcripts from YouTube videos.
+-   **🧠 AI-Powered Summaries**: Utilize OpenAI to generate concise summaries, study notes, and key takeaways.
+-   **📄 PDF Generation**: Export processed content into beautifully formatted PDF documents.
+-   **🔐 Secure Authentication**: User sign-up and login powered by **Supabase Auth**.
+-   **💾 Cloud Persistence**: Save your generated PDF reports and video history to **Supabase Database**.
+-   **📊 User Dashboard**: Manage your generated reports and view usage history.
 
-ShipFree provides Docker configurations for both **development** and **production** environments. Below, you'll find the structure of the Docker files and the commands to get started.
+## 🛠️ Tech Stack
 
-### Docker File Structure
+Built with a modern, type-safe stack for performance and scalability:
 
-The Docker files are organized as follows:
+-   **Framework**: [Next.js 15](https://nextjs.org/) (App Router)
+-   **Language**: [TypeScript](https://www.typescriptlang.org/)
+-   **Database & Auth**: [Supabase](https://supabase.com/)
+-   **ORM**: [Drizzle ORM](https://orm.drizzle.team/)
+-   **Styling**: [Tailwind CSS](https://tailwindcss.com/) & [Shadcn UI](https://ui.shadcn.com/)
+-   **AI**: [OpenAI API](https://openai.com/)
+-   **PDF Engine**: [React-PDF](https://react-pdf.org/) / `pdf-lib`
 
+## 🚀 Getting Started
+
+Follow these steps to set up the project locally.
+
+### Prerequisites
+
+-   Node.js 18+ installed
+-   Docker (optional, for containerized database)
+-   Supabase account
+-   OpenAI API Key
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/blakia/youtube2pdf.git
+cd youtube2pdf
 ```
-docker
-├── dev
-│   ├── Dockerfile                  # Dockerfile for development
-│   ├── docker-compose.yml          # Base development setup
-│   ├── docker-compose.mongodb.yml  # Development setup with MongoDB
-│   └── docker-compose.postgres.yml # Development setup with PostgreSQL
-└── prod
-    ├── Dockerfile                  # Dockerfile for production
-    ├── docker-compose.yml          # Base production setup
-    ├── docker-compose.mongodb.yml  # Production setup with MongoDB
-    └── docker-compose.postgres.yml # Production setup with PostgreSQL
+
+### 2. Install Dependencies
+
+```bash
+npm install
+# or
+pnpm install
 ```
 
-### Development Environment
+### 3. Environment Setup
 
-In development, the project runs in **watch mode**, meaning it automatically detects changes in your code and rebuilds the application. This is ideal for local development but should **never** be used in production.
+Create a `.env` file in the root directory and configure the following variables (see `.env.example`):
 
-#### Commands for Development
+```bash
+# App
+NEXT_PUBLIC_APP_URL=http://localhost:3000
 
-1. **Base Setup** (without a database):
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+DATABASE_URL=your_database_connection_string
 
-   ```bash
-   docker-compose -f docker/dev/docker-compose.yml up --build
-   ```
+# OpenAI
+OPENAI_API_KEY=your_openai_api_key
 
-2. **With PostgreSQL**:
+# Other services (if applicable)
+MAILGUN_API_KEY=...
+STRIPE_SECRET_KEY=...
+```
 
-   ```bash
-   docker-compose -f docker/dev/docker-compose.yml -f docker/dev/docker-compose.postgres.yml up --build
-   ```
+### 4. Database Setup
 
-3. **With MongoDB**:
-   ```bash
-   docker-compose -f docker/dev/docker-compose.yml -f docker/dev/docker-compose.mongodb.yml up --build
-   ```
+Using Drizzle Kit to push the schema to your Supabase database:
 
-#### Why Watch Mode?
+```bash
+npm run db:push
+```
 
-- **Watch mode** ensures that your changes are reflected in real-time without manually restarting the server.
-- It’s perfect for development but **not suitable for production** due to performance and security concerns.
+### 5. Run the Application
 
----
+Start the development server:
 
-### Production Environment
+```bash
+npm run dev
+```
 
-The production environment is optimized for performance and security. It uses a multi-stage build to reduce the image size and includes only the necessary dependencies.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-#### Commands for Production
+## 🐳 Docker Support
 
-1. **Base Setup** (without a database):
+The project includes Docker configurations for both development and production.
 
-   ```bash
-   docker-compose -f docker/prod/docker-compose.yml up --build -d
-   ```
+### Run with Docker Compose
 
-2. **With PostgreSQL**:
+```bash
+# Development
+docker-compose -f docker/dev/docker-compose.yml up --build
 
-   ```bash
-   docker-compose -f docker/prod/docker-compose.yml -f docker/prod/docker-compose.postgres.yml up --build -d
-   ```
+# Production
+docker-compose -f docker/prod/docker-compose.yml up --build -d
+```
 
-3. **With MongoDB**:
-   ```bash
-   docker-compose -f docker/prod/docker-compose.yml -f docker/prod/docker-compose.mongodb.yml up --build -d
-   ```
+## 🤝 Contributing
 
-#### Key Differences in Production
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-- **No watch mode**: The application is pre-built, and changes require a rebuild.
-- **Optimized images**: Smaller image size and faster startup times.
-- **Environment variables**: Ensure all required variables (e.g., `DATABASE_URL`, `API_KEY`) are set.
+1.  Fork the project
+2.  Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3.  Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4.  Push to the branch (`git push origin feature/AmazingFeature`)
+5.  Open a Pull Request
 
----
+## 📄 License
 
-### Portainer Integration
-
-Portainer is included in both development and production setups to help you manage your Docker containers via a web interface.
-
-- **Access Portainer**: `http://localhost:9000`
-- **Default credentials**: Set up during the first login.
-
----
-
-### Disclaimer
-
-- **Development Mode**: Uses watch mode for real-time updates. Not suitable for production.
-- **Production Mode**: Optimized for performance and security. Requires a rebuild for changes.
-
----
-
-## Docs
-
-For full documentation, visit: [ShipFree Docs](https://shipfree.idee8.agency/docs)
-
-## Code of Conduct
-
-Please read our [Code of Conduct](CODE_OF_CONDUCT.md) before contributing.
-
-## Contributing
-
-For people who want to contribute, please refer to [CONTRIBUTING.md](CONTRIBUTING.md).
-
----
-
-Cooked for you with ❤️ by [Revoks](https://revoks.dev)
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.

@@ -3,6 +3,7 @@ import { NextConfig } from "next";
 const nextConfig = {
   typescript: { ignoreBuildErrors: true },
   pageExtensions: ["ts", "tsx", "mdx"],
+  serverExternalPackages: ['@react-pdf/renderer'],
   async headers() {
     return [
       {
