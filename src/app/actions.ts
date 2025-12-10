@@ -27,7 +27,7 @@ export async function generateReportAction(formData: FormData) {
   }
 
   try {
-    const { markdown, pdfBuffer } = await generateReportUseCase.execute(videoId);
+    const { markdown, pdfBuffer } = await generateReportUseCase.execute({ videoId });
     
     console.log('Use case completed successfully');
     console.log('Markdown length:', markdown?.length);

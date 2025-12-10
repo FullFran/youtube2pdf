@@ -1,4 +1,5 @@
 import { IAIService, IPdfService, ITranscriptService } from '@/domain/interfaces';
+import { GenerateReportInputDto, GenerateReportOutputDto, GenerateReportSchema } from './dtos/generate-report.dto';
 
 export class GenerateReportUseCase {
   constructor(
@@ -7,7 +8,10 @@ export class GenerateReportUseCase {
     private pdfService: IPdfService
   ) {}
 
-  async execute(videoId: string): Promise<{ markdown: string; pdfBuffer: Buffer }> {
+  async execute(input: GenerateReportInputDto): Promise<GenerateReportOutputDto> {
+    // Validate input
+    const { videoId } = GenerateReportSchema.parse(input);
+
     // 1. Fetch Transcript
     console.log(`Fetching transcript for ${videoId}...`);
     const transcript = await this.transcriptService.fetchTranscript(videoId);

@@ -1,0 +1,22 @@
+[
+  {
+    "id": "TC001",
+    "title": "generate-pdf-from-markdown",
+    "description": "Test the API endpoint that accepts markdown input and generates a correctly formatted PDF file. Verify the PDF content matches the markdown and the file is downloadable."
+  },
+  {
+    "id": "TC002",
+    "title": "stream-ai-summary-generation",
+    "description": "Test the streaming API endpoint for AI summary generation to ensure it streams the summary content progressively without interruption or errors."
+  },
+  {
+    "id": "TC003",
+    "title": "fetch-and-manage-user-reports",
+    "description": "Test the user reports API endpoint to verify it correctly fetches, updates, and manages user report data stored in the Supabase database."
+  },
+  {
+    "id": "TC004",
+    "title": "generate-report-from-youtube-url",
+    "description": "Test the server action that extracts transcripts from a YouTube URL, generates an AI summary, converts it to a PDF, and returns the PDF in Base64 format. Verify the entire flow works correctly and the output is valid."
+  }
+]

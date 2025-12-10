@@ -1,0 +1,105 @@
+{
+  "meta": {
+    "project": "YouTube2PDF",
+    "date": "2025-12-10",
+    "prepared_by": "Software Development Manager"
+  },
+  "product_overview": "YouTube2PDF is a web application that transforms YouTube video content into actionable PDF summaries and study guides through AI-powered transcript extraction, summarization, and PDF generation. It targets users such as students, researchers, and professionals who seek an efficient way to digest video information.",
+  "core_goals": [
+    "Enable automatic extraction of video transcripts from YouTube URLs.",
+    "Leverage OpenAI's advanced language models to generate concise and insightful summaries, key takeaways, and study notes from video transcripts.",
+    "Provide seamless PDF generation of formatted reports from processed video content for easy sharing and offline access.",
+    "Ensure secure user authentication and management via Supabase Auth.",
+    "Maintain cloud persistence of user data including generated reports, video history, and user profiles using Supabase Database.",
+    "Offer users a dashboard interface to manage generated reports and review their usage history with ease."
+  ],
+  "key_features": [
+    "Video Transcription: Automatically fetch and parse transcripts from YouTube videos to create source content for processing.",
+    "AI-Powered Summaries: Utilize OpenAI APIs to generate meaningful and concise summaries and notes from transcripts.",
+    "PDF Generation: Convert markdown-based summaries into professionally formatted PDFs accessible via API endpoints.",
+    "User Authentication and Security: Implement secure sign-up and login flows using Supabase Auth to protect user data.",
+    "Cloud Data Storage: Persist user reports and video metadata in a Supabase database using Drizzle ORM for reliable storage and querying.",
+    "User Dashboard: Provide an intuitive dashboard for users to view, manage, and access all previously generated reports and video histories.",
+    "Streaming Summary Generation: Allow real-time streaming of AI summary generation to enhance user experience during report creation.",
+    "YouTube URL Report Generation Server Action: Extract transcripts from provided YouTube URLs, summarize content, and return PDFs in Base64 format for easy consumption."
+  ],
+  "user_flow_summary": [
+    "User signs up or logs into the platform securely via Supabase Auth.",
+    "User inputs a YouTube video URL to start report generation.",
+    "System extracts the video transcript using youtubei.js and processes it through OpenAI to summarize key points.",
+    "The summarized information is formatted into markdown and sent to the PDF generation API endpoint to create a PDF report.",
+    "The generated PDF report is stored in the user's account in the Supabase database for future reference.",
+    "User accesses their dashboard to review, download, or manage all their generated reports and usage history.",
+    "During report creation, the user can see a live streaming view of the AI summary generation process for transparency and engagement."
+  ],
+  "validation_criteria": [
+    "Successful extraction of transcripts from any valid public YouTube video URL.",
+    "Consistent generation of accurate and contextually relevant AI summaries from video transcript inputs.",
+    "PDF files generated must accurately reflect summarized content, be well-formatted, and downloadable.",
+    "Authentication workflows (sign-up, login, logout) must be secure and handle errors gracefully.",
+    "User reports and histories persist correctly in Supabase and can be retrieved reliably.",
+    "The user dashboard displays up-to-date reports and usage, reflecting recent actions without delay.",
+    "Streaming summary generation shows live progress without interruption or failure.",
+    "Server actions correctly produce valid Base64 encoded PDF reports from YouTube URLs as expected."
+  ],
+  "code_summary": {
+    "tech_stack": [
+      "TypeScript",
+      "Next.js",
+      "Supabase",
+      "Drizzle ORM",
+      "OpenAI",
+      "Tailwind CSS",
+      "React",
+      "Zod",
+      "youtubei.js"
+    ],
+    "features": [
+      {
+        "name": "generate-pdf",
+        "description": "API endpoint to generate PDF from markdown",
+        "files": [
+          "src/app/api/generate-pdf/route.ts"
+        ],
+        "api_doc": {
+          "summary": "Generate PDF",
+          "description": "Accepts markdown and returns a PDF file."
+        }
+      },
+      {
+        "name": "generate-stream",
+        "description": "API endpoint to stream AI summary generation",
+        "files": [
+          "src/app/api/generate-stream/route.ts"
+        ],
+        "api_doc": {
+          "summary": "Stream AI Summary",
+          "description": "Streams the summary generation process."
+        }
+      },
+      {
+        "name": "user-reports",
+        "description": "API endpoint to fetch or manage user reports",
+        "files": [
+          "src/app/api/user-reports/route.ts"
+        ],
+        "api_doc": {
+          "summary": "User Reports",
+          "description": "Handles user report data."
+        }
+      },
+      {
+        "name": "generateReportAction",
+        "description": "Server Action to generate report from YouTube URL",
+        "files": [
+          "src/app/actions.ts",
+          "src/application/generate-report.use-case.ts"
+        ],
+        "api_doc": {
+          "summary": "Generate Report Action",
+          "description": "Extracts transcript, summarizes, and returns PDF base64."
+        }
+      }
+    ]
+  }
+}
