@@ -1,116 +1,121 @@
-# 🎬 YouTube2PDF - Subtitle Extraction & Report Generation  
+# 🎥 YouTube2PDF
 
-🚀 **Quickly save and organize YouTube subtitles for easy reference, structured notes, and professional documentation.**  
-Whether you're watching **technical tutorials, lectures, interviews, or research videos**, this tool helps you extract subtitles and convert them into **readable reports** in **Markdown or PDF**—without manually taking notes.  
+Turn YouTube videos into actionable PDF summaries and study guides using AI.
 
----
+YouTube2PDF is a powerful tool that extracts transcripts from YouTube videos, processes them with OpenAI's advanced language models, and generates clean, professional PDF reports. Perfect for students, researchers, and professionals who need to digest video content quickly.
 
-## 🌟 Why This Matters  
+![YouTube2PDF Banner](https://placehold.co/1200x400/2563eb/ffffff?text=YouTube2PDF)
 
-Technical videos contain **valuable information**, but revisiting them for key points is time-consuming.  
-Instead of **rewatching an entire video**, this tool lets you **save and structure subtitles into organized reports** for quick reference.  
+## ✨ Features
 
-✅ **Never lose track of important content** – Convert YouTube subtitles into searchable documents.  
-✅ **Improve learning efficiency** – Review tutorials and courses as structured reports.  
-✅ **Enhance accessibility** – Keep a readable copy of video content without replaying it.  
-✅ **Save time** – No need to manually transcribe or format subtitles.  
+-   **📽️ Video Transcription**: Automatically fetch and parse transcripts from YouTube videos.
+-   **🧠 AI-Powered Summaries**: Utilize OpenAI to generate concise summaries, study notes, and key takeaways.
+-   **📄 PDF Generation**: Export processed content into beautifully formatted PDF documents.
+-   **🔐 Secure Authentication**: User sign-up and login powered by **Supabase Auth**.
+-   **💾 Cloud Persistence**: Save your generated PDF reports and video history to **Supabase Database**.
+-   **📊 User Dashboard**: Manage your generated reports and view usage history.
 
----
+## 🛠️ Tech Stack
 
-## 🎯 How It Works  
+Built with a modern, type-safe stack for performance and scalability:
 
-1. **Paste a YouTube video URL** – The system retrieves subtitles automatically.  
-2. **Select your format** – Get structured **Markdown reports or PDFs**.  
-3. **AI-powered formatting** – Large Language Models (LLMs) organize subtitles into structured reports.  
-4. **Download your file** – Ready-to-use documents in seconds.  
+-   **Framework**: [Next.js 15](https://nextjs.org/) (App Router)
+-   **Language**: [TypeScript](https://www.typescriptlang.org/)
+-   **Database & Auth**: [Supabase](https://supabase.com/)
+-   **ORM**: [Drizzle ORM](https://orm.drizzle.team/)
+-   **Styling**: [Tailwind CSS](https://tailwindcss.com/) & [Shadcn UI](https://ui.shadcn.com/)
+-   **AI**: [OpenAI API](https://openai.com/)
+-   **PDF Engine**: [React-PDF](https://react-pdf.org/) / `pdf-lib`
 
-💡 **Example Use Cases:**  
-- Developers saving **coding tutorials** as documentation.  
-- Students organizing **lecture notes** efficiently.  
-- Professionals keeping track of **webinars & training videos**.  
+## 🚀 Getting Started
 
----
+Follow these steps to set up the project locally.
 
-## 🛠️ Key Features  
+### Prerequisites
 
-✅ **Extracts subtitles from YouTube videos**  
-✅ **AI-enhanced Markdown formatting** for structured notes  
-✅ **Automatic PDF generation** for offline access  
-✅ **Fast, lightweight API** for subtitle processing  
-✅ **Cloud-based, no installation needed**  
+-   Node.js 18+ installed
+-   Docker (optional, for containerized database)
+-   Supabase account
+-   OpenAI API Key
 
+### 1. Clone the repository
 
-## 📌 Try It Now  
+```bash
+git clone https://github.com/blakia/youtube2pdf.git
+cd youtube2pdf
+```
 
-A live demo is available on fullfran.github.io/youtube2pdf/, where you can test the tool by pasting a YouTube URL and selecting the desired format.  
+### 2. Install Dependencies
 
-## 🛠️ Technologies Used
-- FastAPI (Python) – High-performance API for subtitle extraction
-- Large Language Models (LLMs) – AI-powered text formatting
-- Docker – Containerized deployment
-- Railway Cloud – Scalable backend hosting
-- GitHub Pages – Frontend deployment
-- JavaScript (Vanilla, Fetch API) – Interactive UI
+```bash
+npm install
+# or
+pnpm install
+```
 
-This stack ensures:
+### 3. Environment Setup
 
-- ⚡ Fast API responses with FastAPI
-- 🤖 AI-enhanced text processing for subtitle formatting
-- ☁️ Cloud-hosted backend for instant availability
-- 📦 Scalable & portable deployment with Docker
+Create a `.env` file in the root directory and configure the following variables (see `.env.example`):
 
+```bash
+# App
+NEXT_PUBLIC_APP_URL=http://localhost:3000
 
----
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+DATABASE_URL=your_database_connection_string
 
-## 🚀 Deployment Guide  
+# OpenAI
+OPENAI_API_KEY=your_openai_api_key
 
-### 🔧 Running Locally  
-1. **Clone the repository**  
-   ```bash
-   git clone https://github.com/fullfran/youtube2pdf.git
-   cd youtube2pdf
-   ```
+# Other services (if applicable)
+MAILGUN_API_KEY=...
+STRIPE_SECRET_KEY=...
+```
 
-2. **Create a virtual environment and install dependencies**  
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # En Windows usa: venv\Scripts\activate
-   pip install -r requirements.txt
-   ```
+### 4. Database Setup
 
-3. **Run the FastAPI server**  
-   ```bash
-   uvicorn app.main:app --reload
-   ```
+Using Drizzle Kit to push the schema to your Supabase database:
 
-4. Open `http://127.0.0.1:8000/docs` to access the API.  
+```bash
+npm run db:push
+```
 
----
+### 5. Run the Application
 
-### 🐳 Running with Docker  
-1. **Build the Docker image**  
-   ```bash
-   docker build -t youtube2pdf .
-   ```
+Start the development server:
 
-2. **Run the container**  
-   ```bash
-   docker run -p 8000:8000 youtube2pdf
-   ```
+```bash
+npm run dev
+```
 
-3. Open `http://127.0.0.1:8000/docs` to access the API.  
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## 🐳 Docker Support
 
----
+The project includes Docker configurations for both development and production.
 
-### 🚄 Deploying on Railway  
-1. **Fork the repository** on GitHub.  
-2. **Go to Railway** and create a new project.  
-3. **Connect it to your forked repository**.  
-4. **Add the required environment variables**.  
-5. **Deploy with one click** and get a live URL ready to use.  
+### Run with Docker Compose
 
+```bash
+# Development
+docker-compose -f docker/dev/docker-compose.yml up --build
 
+# Production
+docker-compose -f docker/prod/docker-compose.yml up --build -d
+```
 
+## 🤝 Contributing
 
+Contributions are welcome! Please feel free to submit a Pull Request.
 
+1.  Fork the project
+2.  Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3.  Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4.  Push to the branch (`git push origin feature/AmazingFeature`)
+5.  Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
