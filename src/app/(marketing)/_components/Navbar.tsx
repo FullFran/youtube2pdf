@@ -1,14 +1,14 @@
 "use client";
 
-import Link from "next/link";
-import { Zap, X } from "lucide-react";
-import { useEffect, useState } from "react";
 import { getGitHubStars } from "@/utils/github";
+import { X, Zap } from "lucide-react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function Navbar() {
   const [stars, setStars] = useState<number | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const repo = "idee8/shipfree";
+  const repo = "FullFran/youtube2pdf";
 
   useEffect(() => {
     getGitHubStars(repo).then(setStars);
@@ -36,7 +36,7 @@ export default function Navbar() {
               stroke="black"
               strokeWidth={1.4}
             />
-            <span className="text-lg font-semibold text-white">ShipFree</span>
+            <span className="text-lg font-semibold text-white">YouTube2PDF</span>
           </Link>
         </div>
 

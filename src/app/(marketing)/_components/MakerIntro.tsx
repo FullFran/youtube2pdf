@@ -12,12 +12,10 @@ export default function MakerIntro() {
 
           <div className="space-y-4">
             <h1 className="text-2xl font-semibold text-white">
-              Built for Founders, by Founders 🚀
+              Stop watching, start learning 🚀
             </h1>
             <p className="text-base">
-              We were tired of spending weeks on setup instead of actually
-              building. Every project felt like déjà vu—setting up auth,
-              configuring Stripe, dealing with email deliverability...
+              We love learning from YouTube, but watching hours of video content just to find one specific insight is time-consuming. Taking notes while watching is even harder.
             </p>
             <p className="text-base">
               So we built{" "}
@@ -25,43 +23,34 @@ export default function MakerIntro() {
                 href="#"
                 className="text-white hover:text-gray-200 underline underline-offset-2"
               >
-                ShipFree
+                YouTube2PDF
               </a>{" "}
-              at <strong>idee8</strong> to remove those roadblocks and help
-              founders launch faster—**for free**.
+              to help students and life-long learners digest video content faster.
             </p>
           </div>
         </div>
 
         <div className="space-y-6">
-          <p className="text-base">We created ShipFree for 3 reasons:</p>
+          <p className="text-base">Use YouTube2PDF to:</p>
 
           <ol className="space-y-4 list-decimal list-inside">
             <li className="text-base">
-              <span className="font-semibold text-white">Save time</span>—skip
-              the repetitive setup and start building immediately.
+              <span className="font-semibold text-white">Save time</span>—get the key takeaways in seconds without watching the whole video.
             </li>
             <li className="text-base">
-              <span className="font-semibold text-white">Avoid headaches</span>
-              —no more struggling with email deliverability, payments, or auth.
+              <span className="font-semibold text-white">Study better</span>
+              —automatically generate study guides and summaries for your exams.
             </li>
             <li className="text-base">
               <span className="font-semibold text-white">
-                Get profitable faster
+                Retain more
               </span>
-              —the faster you ship, the quicker you validate and earn.
+              —read and review the content at your own pace in a clean PDF format.
             </li>
           </ol>
 
           <p className="text-base">
-            Thousands of founders have used ShipFree to{" "}
-            <a
-              href="#"
-              className="text-white hover:text-gray-200 underline underline-offset-2"
-            >
-              launch, land clients, and generate revenue
-            </a>
-            —all without paying a dime. Scroll down to see what they say! 🚀
+            Turn any educational video into a <span className="text-white font-semibold">perfect set of notes</span> instantly. 🚀
           </p>
         </div>
       </div>

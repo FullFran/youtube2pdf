@@ -137,13 +137,12 @@ export default function FeaturesSection() {
     <div className="bg-zinc-900 min-h-screen text-gray-300 py-16 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16 space-y-6">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white max-w-4xl mx-auto leading-tight">
-            Supercharge your app instantly, launch faster, make $
+            Supercharge your learning, save hours of watching
           </h2>
           <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto">
-            Login users, process payments and send emails at lightspeed. Spend
-            your time building your startup, not integrating APIs. ShipFast
-            provides you with the boilerplate code you need to launch, FAST.
+            Get instant summaries, study guides, and flashcards from any YouTube video.
+            Spend your time understanding concepts, not just watching videos. YouTube2PDF
+            provides you with the tools you need to learn, FAST.
           </p>
         </div>
 

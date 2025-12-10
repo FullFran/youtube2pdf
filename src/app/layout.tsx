@@ -1,8 +1,8 @@
+import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Bricolage_Grotesque } from "next/font/google";
-import "./globals.css";
 import type React from "react"; // Import React
-import { cn } from "@/lib/utils";
+import "./globals.css";
 
 const bricolageGrotesque = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -10,20 +10,20 @@ const bricolageGrotesque = Bricolage_Grotesque({
 });
 
 export const metadata: Metadata = {
-  title: "ShipFree",
+  title: "YouTube2PDF",
   description:
-    "Open Source Alternative to ShipFast - Launch your startup in days Not in weeks",
+    "Turn YouTube videos into actionable PDF summaries and study guides using AI.",
   keywords: [
-    "saas",
-    "boilerplate",
-    "open source",
-    "free",
-    "open source shipfast",
-    "shipfree",
-    "idee8",
-    "made by idee8",
-    "free boilerplate",
-    "github",
+    "youtube to pdf",
+    "video summarizer",
+    "ai study guide",
+    "youtube transcript",
+    "pdf generator",
+    "student tools",
+    "research tools",
+    "openai",
+    "supabase",
+    "nextjs",
   ],
 };
 

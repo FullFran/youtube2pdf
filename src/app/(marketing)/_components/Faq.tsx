@@ -7,58 +7,35 @@ interface FAQItem {
   answer: string;
 }
 
-const faqs: FAQItem[] = [
   {
-    question: "Is this really free?",
+    question: "Is YouTube2PDF free to use?",
     answer:
-      "Yes! ShipFree is open-source and community-driven. Use it for unlimited projects, no strings attached.",
+      "Yes! You can generate PDF summaries from YouTube videos completely for free.",
   },
   {
-    question: "What do I need to use ShipFree?",
+    question: "How does it work?",
     answer:
-      "All you need is a GitHub account to clone the repo and a deployment platform like Vercel or Railway.",
+      "We fetch the transcript from the YouTube video, process it with OpenAI to generate a summary and study notes, and then convert it into a downloadable PDF.",
   },
   {
-    question: "Can I customize it?",
+    question: "Do I need an OpenAI API Key?",
     answer:
-      "Built with Next.js, Tailwind, and modern tools, ShipFree is fully extensible.",
+      "Yes, you need to provide your own OpenAI API Key to generate the AI summaries. Your key is stored securely and only used for your requests.",
   },
   {
-    question: "How does it compare to ShipFast?",
+    question: "Can I save my reports?",
     answer:
-      "ShipFast is paid; ShipFree gives you similar core features—completely free! Perfect for bootstrappers who want to launch now.",
+      "Yes! If you sign up for an account, all your generated reports will be saved to your dashboard for future access.",
   },
   {
-    question: "Does ShipFree include a database?",
-    answer: "Yes! It supports MongoDB and Supabase out of the box.",
+    question: "What languages are supported?",
+    answer: "YouTube2PDF supports any video that has a transcript available on YouTube.",
   },
   {
-    question: "Is there a community I can join?",
+    question: "Is it open source?",
     answer:
-      "Yes! We have an active Discord community where founders help each other grow.",
+      "Yes! YouTube2PDF is open-source. You can check out the code on our GitHub repository.",
   },
-  {
-    question: "What if I need help?",
-    answer:
-      "We have detailed documentation, video tutorials, and community support to guide you.",
-  },
-  {
-    question: "Can I contribute to ShipFree?",
-    answer:
-      "ShipFree is open-source—we welcome contributions from developers worldwide.",
-  },
-
-  {
-    question: "Can I use ShipFree for commercial projects?",
-    answer:
-      "Yes! You can launch and scale real businesses with ShipFree. No restrictions.",
-  },
-  {
-    question: "Is there a roadmap for future features?",
-    answer:
-      "Yes! We're constantly improving ShipFree. Check our GitHub roadmap to see what's coming next.",
-  },
-];
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
