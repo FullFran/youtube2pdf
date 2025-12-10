@@ -1,116 +1,128 @@
-# 🎬 YouTube2PDF - Subtitle Extraction & Report Generation  
+# ⚡ ShipFree
 
-🚀 **Quickly save and organize YouTube subtitles for easy reference, structured notes, and professional documentation.**  
-Whether you're watching **technical tutorials, lectures, interviews, or research videos**, this tool helps you extract subtitles and convert them into **readable reports** in **Markdown or PDF**—without manually taking notes.  
+Hi there! 👋
 
----
+ShipFree is a free alternative to ShipFast, designed to simplify and optimize your shipping process. It’s built using modern web technologies like Next.js, Supabase, Stripe, LemonSqueezy, Drizzle ORM and Mailgun.
 
-## 🌟 Why This Matters  
+## Features
 
-Technical videos contain **valuable information**, but revisiting them for key points is time-consuming.  
-Instead of **rewatching an entire video**, this tool lets you **save and structure subtitles into organized reports** for quick reference.  
+- SEO Optimisation
+- User authentication with Supabase
+- Stripe and LemonSqueezy integration
+- Email notifications via Mailgun
+- Modern UI built with Next.js and TailwindCSS
 
-✅ **Never lose track of important content** – Convert YouTube subtitles into searchable documents.  
-✅ **Improve learning efficiency** – Review tutorials and courses as structured reports.  
-✅ **Enhance accessibility** – Keep a readable copy of video content without replaying it.  
-✅ **Save time** – No need to manually transcribe or format subtitles.  
+## Docker Setup
 
----
+ShipFree provides Docker configurations for both **development** and **production** environments. Below, you'll find the structure of the Docker files and the commands to get started.
 
-## 🎯 How It Works  
+### Docker File Structure
 
-1. **Paste a YouTube video URL** – The system retrieves subtitles automatically.  
-2. **Select your format** – Get structured **Markdown reports or PDFs**.  
-3. **AI-powered formatting** – Large Language Models (LLMs) organize subtitles into structured reports.  
-4. **Download your file** – Ready-to-use documents in seconds.  
+The Docker files are organized as follows:
 
-💡 **Example Use Cases:**  
-- Developers saving **coding tutorials** as documentation.  
-- Students organizing **lecture notes** efficiently.  
-- Professionals keeping track of **webinars & training videos**.  
+```
+docker
+├── dev
+│   ├── Dockerfile                  # Dockerfile for development
+│   ├── docker-compose.yml          # Base development setup
+│   ├── docker-compose.mongodb.yml  # Development setup with MongoDB
+│   └── docker-compose.postgres.yml # Development setup with PostgreSQL
+└── prod
+    ├── Dockerfile                  # Dockerfile for production
+    ├── docker-compose.yml          # Base production setup
+    ├── docker-compose.mongodb.yml  # Production setup with MongoDB
+    └── docker-compose.postgres.yml # Production setup with PostgreSQL
+```
 
----
+### Development Environment
 
-## 🛠️ Key Features  
+In development, the project runs in **watch mode**, meaning it automatically detects changes in your code and rebuilds the application. This is ideal for local development but should **never** be used in production.
 
-✅ **Extracts subtitles from YouTube videos**  
-✅ **AI-enhanced Markdown formatting** for structured notes  
-✅ **Automatic PDF generation** for offline access  
-✅ **Fast, lightweight API** for subtitle processing  
-✅ **Cloud-based, no installation needed**  
+#### Commands for Development
 
+1. **Base Setup** (without a database):
 
-## 📌 Try It Now  
-
-A live demo is available on fullfran.github.io/youtube2pdf/, where you can test the tool by pasting a YouTube URL and selecting the desired format.  
-
-## 🛠️ Technologies Used
-- FastAPI (Python) – High-performance API for subtitle extraction
-- Large Language Models (LLMs) – AI-powered text formatting
-- Docker – Containerized deployment
-- Railway Cloud – Scalable backend hosting
-- GitHub Pages – Frontend deployment
-- JavaScript (Vanilla, Fetch API) – Interactive UI
-
-This stack ensures:
-
-- ⚡ Fast API responses with FastAPI
-- 🤖 AI-enhanced text processing for subtitle formatting
-- ☁️ Cloud-hosted backend for instant availability
-- 📦 Scalable & portable deployment with Docker
-
-
----
-
-## 🚀 Deployment Guide  
-
-### 🔧 Running Locally  
-1. **Clone the repository**  
    ```bash
-   git clone https://github.com/fullfran/youtube2pdf.git
-   cd youtube2pdf
+   docker-compose -f docker/dev/docker-compose.yml up --build
    ```
 
-2. **Create a virtual environment and install dependencies**  
+2. **With PostgreSQL**:
+
    ```bash
-   python -m venv venv
-   source venv/bin/activate  # En Windows usa: venv\Scripts\activate
-   pip install -r requirements.txt
+   docker-compose -f docker/dev/docker-compose.yml -f docker/dev/docker-compose.postgres.yml up --build
    ```
 
-3. **Run the FastAPI server**  
+3. **With MongoDB**:
    ```bash
-   uvicorn app.main:app --reload
+   docker-compose -f docker/dev/docker-compose.yml -f docker/dev/docker-compose.mongodb.yml up --build
    ```
 
-4. Open `http://127.0.0.1:8000/docs` to access the API.  
+#### Why Watch Mode?
+
+- **Watch mode** ensures that your changes are reflected in real-time without manually restarting the server.
+- It’s perfect for development but **not suitable for production** due to performance and security concerns.
 
 ---
 
-### 🐳 Running with Docker  
-1. **Build the Docker image**  
+### Production Environment
+
+The production environment is optimized for performance and security. It uses a multi-stage build to reduce the image size and includes only the necessary dependencies.
+
+#### Commands for Production
+
+1. **Base Setup** (without a database):
+
    ```bash
-   docker build -t youtube2pdf .
+   docker-compose -f docker/prod/docker-compose.yml up --build -d
    ```
 
-2. **Run the container**  
+2. **With PostgreSQL**:
+
    ```bash
-   docker run -p 8000:8000 youtube2pdf
+   docker-compose -f docker/prod/docker-compose.yml -f docker/prod/docker-compose.postgres.yml up --build -d
    ```
 
-3. Open `http://127.0.0.1:8000/docs` to access the API.  
+3. **With MongoDB**:
+   ```bash
+   docker-compose -f docker/prod/docker-compose.yml -f docker/prod/docker-compose.mongodb.yml up --build -d
+   ```
 
+#### Key Differences in Production
+
+- **No watch mode**: The application is pre-built, and changes require a rebuild.
+- **Optimized images**: Smaller image size and faster startup times.
+- **Environment variables**: Ensure all required variables (e.g., `DATABASE_URL`, `API_KEY`) are set.
 
 ---
 
-### 🚄 Deploying on Railway  
-1. **Fork the repository** on GitHub.  
-2. **Go to Railway** and create a new project.  
-3. **Connect it to your forked repository**.  
-4. **Add the required environment variables**.  
-5. **Deploy with one click** and get a live URL ready to use.  
+### Portainer Integration
 
+Portainer is included in both development and production setups to help you manage your Docker containers via a web interface.
 
+- **Access Portainer**: `http://localhost:9000`
+- **Default credentials**: Set up during the first login.
 
+---
 
+### Disclaimer
 
+- **Development Mode**: Uses watch mode for real-time updates. Not suitable for production.
+- **Production Mode**: Optimized for performance and security. Requires a rebuild for changes.
+
+---
+
+## Docs
+
+For full documentation, visit: [ShipFree Docs](https://shipfree.idee8.agency/docs)
+
+## Code of Conduct
+
+Please read our [Code of Conduct](CODE_OF_CONDUCT.md) before contributing.
+
+## Contributing
+
+For people who want to contribute, please refer to [CONTRIBUTING.md](CONTRIBUTING.md).
+
+---
+
+Cooked for you with ❤️ by [Revoks](https://revoks.dev)
